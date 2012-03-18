@@ -1,0 +1,172 @@
+% This tex document is a resume template for a software engineer
+% The author is Ted Chang. You can contact him at
+% zgk_1208@yahoo.com.cn
+% compile command: 
+% [ted@ted resume]$ latex resume.tex
+% [ted@ted resume]$ dvipdf resume.dvi
+\documentclass{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\textheight=10in
+\pagestyle{empty}
+%\raggedbottom
+\raggedright
+%\renewcommand{\encodingdefault}{cg}
+%\renewcommand{\rmdefault}{lgrcmr}
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+
+% DEFINITIONS FOR RESUME
+\newcommand{\area}[2]{\vspace*{-9pt} \begin{verse}\textbf{#1} #2 \end{verse}}
+\newcommand{\lineunder}{\vspace*{-8pt} \\ \hspace*{-18pt} \hrulefill \\}
+\newcommand{\header}[1]{{\hspace*{-15pt}\vspace*{6pt} \textsc{#1}} \vspace*{-6pt} \lineunder}
+\newcommand{\employer}[3]{{ \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\}}
+% Following is contact information (Phone number, email, home page)
+\newcommand{\contact}[3]{\vspace*{-8pt} \begin{center}{\LARGE \scshape {#1}}\\ #2 \lineunder
+    #3 \end{center} \vspace*{-8pt}
+}
+% Following is project
+\newcommand{\project}[4]{{#1}\\ \textbf{Project Description}:
+  {#2}\\ \textbf{Job Description}: {#3}\\ \textbf{Tools}: {#4}\vspace*{3pt}}
+% Following is achievement list you have gained
+\newenvironment{achievements}{\begin{list}{$\bullet$}{\topsep 0pt
+      \itemsep -2pt}}{\vspace*{6pt}\end{list}}
+%\newcommand{\schoolwithcourses}[4]{
+% \textbf{#1} #2 $\bullet$ #3\\ 
+%#4 $\bullet$  Selected Coursework:\\
+%\vspace*{5pt}
+%}
+\newcommand{\school}[2]{\textbf{#1} $\bullet$ #2 \vspace*{5pt}}
+% END RESUME DEFINITIONS
+
+
+\begin{document}
+
+\small
+\smallskip
+\vspace*{-44pt}
+
+\contact{Guangkai Zhang}
+{Haidian District, Beijing}
+{15811559385 $\bullet$ zgk\_1208@yahoo.com.cn $\bullet$ https://github.com/Ted-Chang}
+
+
+% Education information goes here
+\header{Education}
+\school{Xi'an Univesity of Architecture and
+  Technology}{Bachelor of Computer Information Management. 2008}
+% Education information ends
+
+
+% Work Experience goes here
+\header{Work Experience}
+\employer{BWSTOR - Beijing Branch}{2008.3-2008.5}{Internship Software Engineer}
+        \begin{achievements}
+        \item Develop the BWFS SAN Server Management System 5.0 with
+          shell and perl
+        \item Apply LTP(Linux Test Project) to BWFS SAN test system.
+        \end{achievements}
+
+\employer{BWSTOR - Beijing Branch}{2008.7-2011.7}{Software Engineer}
+	\begin{achievements}
+	\item 
+          \project{BWFS SAN Windows Client performance tuning.}
+          {Assist the team leader to improve the I/O Performance of
+            BWFS SAN Windows Client 5.0.}
+          {investigate performance analyzing tools, benchmark testing
+            tools, do performance test and performance data analyzing.}
+          {Compuware Driver Studio Suites, iometer, iozone.}
+	\item 
+          \project{Port BWFS SAN Windows Client and VDisk to 64bit
+            Windows.}
+          {Porting the BWFS SAN Windows Client file system driver and
+            VDisk driver to 64bit Windows. The VDisk driver is a SCSI
+            Miniport driver which provide functions as iSCSI initiator
+            but using the NBD(Network Block Device) protocol.}
+          {upgrading development environment, porting drivers, fix
+            bugs, white box test.}
+          {WinDDK, WinDbg.}
+	\item 
+          \project{Snapshot component for the BWFS SAN Windows Client.}
+          {The snapshot component of BWFS SAN Windows Client contains
+            two parts: a user mode component work with FalconStor's
+            snapshot daemon and a driver component provides functions
+            such as flushing, freezing and thawing the virtual disk
+            device created by client's file system driver.}
+          {develop the user mode component, code review, fix bugs,
+            white box test.}
+          {Visual C++ 2005}
+	\item 
+          \project{SCSI I/O feature for the BWFS SAN Windows Client.}
+          {Break the 4G maximum addressable LBA restriction in
+            Windows XP so customers can export a single device which
+            is larger than 2TB(block size 512 Bytes) to the Windows XP
+            client.}
+          {develop the user mode and kernel mode components, fix bugs,
+            white box test.}
+          {Visual C++ 2005, WinDDK, WinDbg.}
+        \item 
+          \project{File system level flow control feature for the BWFS
+            SAN Windows Client.}
+          {Provide the file system level flow control feature so our
+            customers can make use of the network bandwidth reasonably
+            when using iSCSI as the lower device.}
+          {design, develop the user mode and kernel mode components,
+            code review, fix bugs, white box test.}
+          {Visual C++ 2005, WinDDK, WinDbg, iometer.}
+        \item 
+          \project{ACL feature for the BWFS SAN Windows Client.}
+          {Provide Windows ACL feature so our customers can do
+            flexible permission management in the Windows way. We also
+            make this feature compatible with Samba's NT ACL so the
+            ACL can be modified via a Linux Samba export.}
+          {investigate, design, develop the user mode and kernel mode
+            components, white box test.}
+          {WinDDK, WinDbg, GDB, Samba source.}
+        \item 
+          \project{Multipath component for the BWFS SAN Windows Client.}
+          {Provide multipath high availability feature on file system
+            level.}
+          {investigate the mechanism of Linux device mapper, develop
+            sub component of the kernel mode pseudo device layer, code
+            review, white box test.}
+          {Visual C++ 2005, WinDDK, WinDbg, Linux device mapper source.}
+	\end{achievements}
+
+\employer{Tencent Technology - Beijing Branch}{2011.7-2012.3} {Software Engineer}
+	\begin{achievements}
+	\item Develop the QQ Account Protect module which protect users from web phishing.
+	\item Analyze scanning log of the VDC(Virus Data Center) with python.
+	\item Develop the QQ AntiVirus policy dispatch module.
+	\end{achievements}
+% Work Experience ends
+
+
+% Skills goes here
+\header{Skills}
+\begin{achievements}
+\item Proficiency in software development in ASM, C, C++, Python.
+\item Excellent debugging skills with WinDbg.
+\item Familiarity with Windows NT kernel, Windows Driver Model,
+  Windows File System Driver development, Windows Storage Stack.
+\item Knowledge in SCSI Miniport Driver and Disk Filter Driver.
+\item Experience in diagnosing performance problem with Windows
+  Performance Toolkit.
+\item Technical support experience for foreign customers.
+\item Familiarity with GNU/Linux system management.
+\end{achievements}
+% Skills ends
+
+
+% Honors and Awards goes here
+\header{Honors and Awards}
+\begin{achievements}
+\item Awarded the 2009 Excellent Project Award from BWSTOR.
+\item WDK Community BUG BASH 2010 Prize from osronline.
+\end{achievements}
+% Honors and Awards ends
+
+
+\end{document}
