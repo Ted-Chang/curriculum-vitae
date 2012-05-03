@@ -1,5 +1,5 @@
 How to build?
-To compile this resume, you need a tex compiler. I have builded the resume with Tex Live 2011.
+To compile this resume, you need a tex compiler. I have built the resume with Tex Live 2011.
 The sequence of the command as follows.
 
 [ted@ted resume]$ latex CurriculumVitae.tex
