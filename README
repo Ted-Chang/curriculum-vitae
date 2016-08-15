@@ -1,9 +1,13 @@
+Prerequisite
+$ sudo yum install texlive
+$ sudo yum install texlive-preprint
+
 How to build?
 To compile this resume, you need a tex compiler. I have built the resume with Tex Live 2011.
 The sequence of the command as follows.
 
-[ted@ted resume]$ latex CurriculumVitae.tex
-[ted@ted resume]$ dvipdf CurriculumVitae.dvi
+$ latex CurriculumVitae.tex
+$ dvipdf CurriculumVitae.dvi
 
-If any problem occurs, you can contact with Ted Chang at ted.g.zhang@live.com
+If any problem occurs, you can contact with Ted Zhang at ted.g.zhang@live.com
 
