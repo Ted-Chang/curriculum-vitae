@@ -1,179 +1,164 @@
-% This tex document is a resume template for a software engineer
-% The author is Ted Chang. You can contact him at
-% ted.g.zhang@live.com
-% compile command: 
-% [ted@ted resume]$ latex CurriculumVitae.tex
-% [ted@ted resume]$ dvipdf CurriculumVitae.dvi
-\documentclass{article}
-\usepackage{fullpage}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\textheight=10in
-\pagestyle{empty}
-%\raggedbottom
-\raggedright
-%\renewcommand{\encodingdefault}{cg}
-%\renewcommand{\rmdefault}{lgrcmr}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Latex Curriculum Viate
+%
+% Author: Ted Zhang <ted.g.zhang@live.com>
+%
+% Compilation Guide:
+%   $ sudo yum install texlive
+%   $ sudo yum install texlive-cjk
+%   $ sudo pdflatex CurriculumViate.tex
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+\documentclass{CurriculumVitae} % Use the custom CurriculumVitae.cls style
 
-
-% DEFINITIONS FOR CV
-\newcommand{\area}[2]{\vspace*{-9pt} \begin{verse}\textbf{#1} #2 \end{verse}}
-\newcommand{\lineunder}{\vspace*{-8pt} \\ \hspace*{-18pt} \hrulefill \\}
-\newcommand{\header}[1]{{\hspace*{-15pt}\vspace*{6pt} \textsc{#1}} \vspace*{-6pt} \lineunder}
-\newcommand{\employer}[3]{{ \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\}}
-
-% Following is contact information (Phone number, email, home page)
-\newcommand{\contact}[3]{\vspace*{-8pt} \begin{center}{\LARGE \scshape {#1}}\\ #2 \lineunder
-    #3 \end{center} \vspace*{-8pt}
-}
-% Following is project
-\newcommand{\project}[4]{{#1}\\ \textbf{Project Description}:
-  {#2}\\ \textbf{Job Description}: {#3}\\ \textbf{Tools}: {#4}\vspace*{3pt}}
-
-% Following is achievement list you have gained
-\newenvironment{achievements}{\begin{list}{$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{6pt}\end{list}}
-
-%\newcommand{\schoolwithcourses}[4]{
-% \textbf{#1} #2 $\bullet$ #3\\ 
-%#4 $\bullet$  Selected Coursework:\\
-%\vspace*{5pt}
-%}
-
-\newcommand{\school}[2]{\textbf{#1} $\bullet$ #2 \vspace*{5pt}}
-% END CV DEFINITIONS
-
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\usepackage{CJK} % For Chinese version
 
 \begin{document}
 
-\small
-\smallskip
-\vspace*{-44pt}
+%---------------------------
+% Contact info section
+%---------------------------
+\contact{Ted Zhang}{Pudong New Area, Shanghai}{15811559385 $\bullet$ ted.g.zhang@live.com $\bullet$ https://github.com/Ted-Chang}
 
-\contact{Guangkai Zhang}
-{Haidian District, Beijing}
-{15811559385 $\bullet$ ted.g.zhang@live.com $\bullet$ https://github.com/Ted-Chang}
-
-
-% Education information goes here
+%---------------------------
+% Education info section
+%---------------------------
 \header{Education}
-\school{Xi'an Univesity of Architecture and
-  Technology}{Bachelor of Computer Information Management. 2008}
-% Education information ends
+\university{Xi'an University of Architecture and Technology}{Bachelor of Computer Information Management. 2008}
 
-
-% Work Experience goes here
+%---------------------------
+% Work Experience section
+%---------------------------
 \header{Work Experience}
-% LeCloud work experience goes here
-\employer{Le Cloud}{2016.6-present}{Senior Software Engineer}
+\employer{Wanda Cloud}{2017.3-2018.1}{Senior Software Engineer}
 \begin{achievements}
-\item Help develop and maintain the cloud storage system of LeCloud, mainly focused on Ceph development and storage performance tuning.
+\item Based on NFS we implemented a storage gateway which bridge NFS to S3 storage so that customer can gain both the performance of NFS and capacity of S3 storage. The gateway is opaque to applications. File data was synchronized with S3 storage periodically in background.
+\item Based on influxdb and heapster I developed the monitoring and alerting system for Wanda Container Platform which implemented the functionality that monitoring the system resource usage, state of pods/services.
+\item Added new interface to OpenStack cinder to get the storage usage of the Ceph RBD volume.
 \end{achievements}
 
-% EMC Corp. work experience goes here
+\employer{LeTV Cloud}{2016.6-2017.3}{Senior Software Engineer}
+\begin{achievements}
+\item By adding BloomFilter configuration to rocksdb we improved the small IO read performance by about 5X for Ceph KStore.
+\item By adding a new IO flag, we reduced 2 metadata reads in the process of writing a new object, thus improved the small write performance by about 5X for Ceph KStore.
+\item By using multiple ColumnFamily in rocksdb and writing data to them we improved the small write performance by about 20\% for Ceph KStore.
+\end{achievements}
+
 \employer{EMC Corp.}{2012.6-2016.6}{Senior Software Engineer}
 \begin{achievements}
-\item
-  \project{EMC VNX Rockies Release}
-          {Help deliver EMC Mid-Range storage product VNX. Mainly focused on storage virtualization subsystem MLU(Mapped LUN) which is similar to Linux Device Mapper. Features and functions including Advanced Snapshot, Auto Tiering, ODX(Offload Data Xfer), Storage Pool Space Reclaim, etc.}
-          {Main responsibility include participating in discussion of feature development, writing HLD and functional spec, coding and unit testing, bug fixing. During the whole project life cycle I delivered more than 10000 lines of production code, fixed several P0 DMC(Data MisCompare) issues, fixed dozens of P1 DU/DL(Data Unavailable/Data Loss) issues and many other defects. And I delivered a patent about file system lock with my team members. I also played the role as a code stream manager during some sub-projects development.}
-          {Distributed Lock Service, SCSI protocol, File System, Transaction Management, Object Management, GCC, GDB, various storage test tools}
-
-\item
-  \project{EMC Unity KittyHawk/ThunderBird/Falcon Release}
-          {Help deliver EMC Entry level storage product Unity. Features include IMLR(In Memory Log Replay), PFDC(Persistent File Data Cache), etc.}
-          {Main responsibility include participating in discussion of feature development, coding and unit testing, bug fixing. During the project life cycle I delivered thousands of lines of production code, fixed several P1 issues and many other defects, ported a whole module from VNX platform to Unity platform.}
-          {File System Log, File System Transaction Management, GCC, GDB}
+\item Delivered VNX Snapshot(ROFW Snapshot) feature. I mainly focused on snapshot object management, state machine management, interaction with CBFS file system, etc.
+\item Delivered VNX auto-tiering feature which place data on appropriate tier by their temperature. I mainly focused on slice management, IO accounting, slice relocation in CBFS file system, etc.
+\item Delivered VNX ODX(Offload Data Xfer) feature which perform in-box data copy request initiated by client. I mainly focused on token based request management which tracks the data copy of client ODX SCSI request.
+\item Delivered VNX pool LUN based file system storage space evacuation. I mainly focused on block level storage space evacuation scheduler.
 \end{achievements}
 
-% Tencent work experience goes here
-\employer{Tencent Technology - Beijing Branch}{2011.7-2012.3} {Software Engineer}
+\employer{Tencent Technology}{2011.7-2012.6}{Software Engineer}
 \begin{achievements}
-\item Develop the QQ Account Protect module which protect users from web phishing.
-\item Analyze scanning log of the VDC(Virus Data Center) with python.
-\item Develop the QQ AntiVirus policy dispatch module.
+\item Developed QQ PC Manager anti-virus engine policy module which summarized the final file scan result of multiple local anti-virus engine.
+\item Developed QQ PC Manager web protect module which retrieved and scanned user url for potential threat.
 \end{achievements}
 
-% BWSTOR work experience goes here
-\employer{BWSTOR - Beijing Branch}{2008.7-2011.7}{Software Engineer}
+\employer{BWSTOR}{2008.7-2011.7}{Software Engineer}
 \begin{achievements}
-\item 
-  \project{BWFS SAN Windows Client performance tuning.}
-          {Assist the team leader to improve the I/O Performance of BWFS SAN Windows Client 5.0.}
-          {Investigate performance analyzing tools, benchmark testing tools. Do performance test and performance data analyzing.}
-          {iometer, iozone.}
-
-\item 
-  \project{Port BWFS SAN Windows Client and VDisk to 64bit Windows.}
-          {Porting the BWFS SAN Windows Client file system driver and VDisk driver to 64bit Windows. The VDisk driver is a SCSI Miniport driver which provide functions as iSCSI initiator but using the NBD(Network Block Device) protocol.}
-          {Port drivers, fix bugs and do white box test.}
-          {WinDDK, WinDbg.}
-
-\item 
-  \project{Snapshot component for the BWFS SAN Windows Client.}
-          {The snapshot component of BWFS SAN Windows Client contains two parts: a user mode component work with FalconStor's snapshot daemon and a driver component provides functions such as flushing, freezing and thawing the virtual disk device created by client's file system driver.}
-          {Develop the user mode component, do code review, fix bugs and do white box test.}
-          {Platform SDK}
-
-\item 
-  \project{SCSI I/O feature for the BWFS SAN Windows Client.}
-          {Break the 4G maximum addressable LBA restriction in Windows XP so customers can export a single device which is larger than 2TB(block size 512 Bytes) to the Windows XP client.}
-          {Develop the user mode and kernel mode components, fix bugs and do white box test.}
-          {Platform SDK, WinDDK, WinDbg.}
-
-\item 
-  \project{File system level flow control feature for the BWFS SAN Windows Client.}
-          {Provide the file system level flow control feature so our customers can make use of the network bandwidth reasonably when using iSCSI as the lower device.}
-          {Design, develop the user mode and kernel mode components, do code review, fix bugs and do white box test.}
-          {Platform SDK, WinDDK, WinDbg, iometer.}
-
-\item 
-  \project{ACL feature for the BWFS SAN Windows Client.}
-          {Provide Windows ACL feature so our customers can do flexible permission management in the Windows way. We also make this feature compatible with Samba's NT ACL so the ACL can be modified via a Linux Samba export.}
-          {Investigate, design, develop the user/kernel mode components and do white box test.}
-          {WinDDK, WinDbg, GDB, Samba source.}
-
-\item 
-  \project{Multipath component for the BWFS SAN Windows Client.}
-          {Provide multipath high availability feature on file system level.}
-          {Investigate the mechanism of Linux device mapper, develop sub component of the kernel mode pseudo device layer, do code review and do white box test.}
-          {Platform SDK, WinDDK, WinDbg, Linux device mapper source.}
-
+\item Delivered the Qos feature for BWFS client which control the client data transfer rate.
+\item Delivered the ACL feature for BWFS. The ACL was compatible with Windows NT ACL and can be accessed by Samba.
+\item Delivered the snapshot feature for BWFS which took snapshot for a distributed file system.
+\item Delivered the multipath IO feature for BWFS client which enabled IO path failover.
 \end{achievements}
 
-\employer{BWSTOR - Beijing Branch}{2008.3-2008.5}{Internship Software Engineer}
-\begin{achievements}
-\item Develop the BWFS SAN Server Management System 5.0 with shell and perl
-\item Apply LTP(Linux Test Project) to BWFS SAN test system.
-\end{achievements}
-% Work Experience ends
-
-
-% Skills goes here
+%---------------------------
+% Skill section
+%---------------------------
 \header{Skills}
 \begin{achievements}
-\item Proficiency in software development in ASM, C, C++, Python.
-\item Excellent debugging skills with WinDbg.
-\item Familiarity with Windows NT kernel, Windows Driver Model,
-  Windows File System Driver development, Windows Storage Stack.
-\item Knowledge in SCSI Miniport Driver and Disk Filter Driver.
-\item Experience in diagnosing performance problem with Windows
-  Performance Toolkit.
-\item Technical support experience for foreign customers.
-\item Familiarity with GNU/Linux system management.
+\item Proficiency in software development in C, C++, Python, shell
+\item Familiarity with Linux/Windows kernel
+\item Familiarity with network storage such as SAN and NAS
+\item Familiarity with Ceph distributed storage system
+\item Knowledge about iSCSI, CIFS, NFS
+\item Knowledge about OpenStack, Kubernetes
 \end{achievements}
-% Skills ends
 
-
-% Honors and Awards goes here
+%---------------------------
+% Hornors and Awards section
+%---------------------------
 \header{Honors and Awards}
 \begin{achievements}
-\item Excellence@EMC for Rockies Release and Falcon Release
-\item WDK Community BUG BASH 2010 Prize from osronline.
-\item Awarded the 2009 Excellent Project Award from BWSTOR.
+\item patent: EIF154437,“A new lock method that improves the NAS file system performance for heavily sharing files IO pattern”
+\item book translation: Practical Malware Analysis: The Hands-On Guide to Dissecting Malicious Software
+\item Excellence@EMC for several product release
+\item 2009 excellent project award at BWSTOR
 \end{achievements}
-% Honors and Awards ends
 
+%---------------------------
+% Start a new page for Chinese version
+%---------------------------
+\newpage
+
+\begin{CJK}{UTF8}{gbsn}
+\contact{张光凯}{上海浦东新区}{15811559385 $\bullet$ ted.g.zhang@live.com $\bullet$ https://github.com/Ted-Chang}
+
+\header{教育背景}
+\university{西安建筑科技大学}{信息管理与信息系统学士. 2008}
+
+\header{工作经验}
+\employer{万达云}{2017.3-2018.1}{主任软件工程师}
+\begin{achievements}
+\item 基于NFS开发云存储网关，实现NFS到S3存储的桥接功能，客户可以通过存储网关同时获得NFS的性能以及S3存储的容量，同时存储网关对应用是透明的，数据通过后台策略定期同步到S3存储
+\item 基于influxdb和heapster开发万达容器平台的监控告警系统，主要实现对pod/service的资源利用率以及状态进行监控并根据配置规则告警
+\item 在OpenStack cinder中增加新的接口，以便获取Ceph RBD volume的空间利用情况
+\end{achievements}
+
+\employer{乐视云计算}{2016.6-2017.3}{高级软件工程师}
+\begin{achievements}
+\item 通过在Ceph KStore底层的rocksdb中加入BloomFilter的配置，提升小IO读性能近5倍
+\item 通过在IO请求中引入新的标志，在写入新的对象时减少2次元数据读请求，使得Ceph KStore小IO写性能提升近5倍
+\item 通过对Ceph KStore底层的rocksdb做sharding，将原有单一ColumnFamily划分为多个ColumnFamily提升rocksdb的并发处理性能，从而提升Ceph KStore小IO写性能约20\%
+\end{achievements}
+
+\employer{EMC}{2012.6-2016.6}{高级软件工程师}
+\begin{achievements}
+\item 交付VNX快照（ROFW快照）特性，个人主要负责快照对象管理、状态机管理以及与CBFS文件系统的交互
+\item 交付VNX数据自动分层特性，实现数据在不同存储介质上根据访问热度迁移，个人主要负责slice的访问频率统计，数据在不同tier之间relocation过程中slice的分配释放流程以及与CBFS文件系统的交互
+\item 交付VNX ODX（Offload Data Xfer）特性，实现数据的后端快速拷贝，个人主要负责基于Token的请求管理（包括Token的节点间同步、过期失效，Token中数据拷贝请求的管理）
+\item 交付VNX基于存储池的文件系统空间回收特性，该特性实现删除文件后将文件系统空间释放，并返还给块设备层的存储池中以便再利用，个人主要负责slice evacuation的调度以及与CBFS文件系统的交互
+\end{achievements}
+
+\employer{腾讯科技}{2011.7-2012.6}{软件工程师T2.1}
+\begin{achievements}
+\item 开发QQ电脑管家反病毒引擎策略模块，该模块主要对本地多个杀毒引擎的扫描结果按权重进行加权后汇总分析，并给出最终查杀结果
+\item 开发QQ电脑管家Web防护模块，该模块主要对用户浏览器访问的url进行云检查并在有潜在威胁时给出相应警告
+\end{achievements}
+
+\employer{天津中科蓝鲸信息技术}{2008.7-2011.7}{软件工程师}
+\begin{achievements}
+\item 交付BWFS客户端的Qos特性，用户通过在客户端限流以便更合理地利用系统总带宽
+\item 交付BWFS客户端的ACL特性，该ACL与Windows NT的ACL兼容并且能通过Samba进行访问和管理
+\item 交付BWFS快照特性，该特性通过协调客户端与MDS（MetaData Server）对BWFS上指定的文件系统做快照
+\item 交付BWFS客户端多路径特性，使客户端可以在多条IO路径间进行的failover
+\end{achievements}
+
+\header{技能}
+\begin{achievements}
+\item 熟悉C, C++, Python, shell
+\item 熟悉Linux/Windows内核
+\item 熟悉网络存储，如SAN、NAS等
+\item 熟悉分布式存储系统Ceph
+\item 熟悉iSCSI, CIFS, NFS协议
+\item 了解OpenStack, Kubernetes
+\end{achievements}
+
+\header{荣誉及奖励}
+\begin{achievements}
+\item 专利：EIF154437,“A new lock method that improves the NAS file system performance for heavily sharing files IO pattern”
+\item 译著: 恶意代码分析实战
+\item 在多个产品发布中获得Excellence@EMC奖励
+\item 2009在中科蓝鲸获得优秀项目奖
+\end{achievements}
+
+\end{CJK}
 
 \end{document}
+
